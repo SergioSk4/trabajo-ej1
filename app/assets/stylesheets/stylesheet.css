@@ -1,0 +1,50 @@
+/* Global Styles */
+* {
+	font-family: "Montserrat", sans-serif;
+}
+
+.action-btn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	color: #2c2c2c;
+	opacity: 0.6;
+	height: 100%;
+}
+
+.action-btn:hover {
+	opacity: 1;
+}
+
+.action-btn i {
+	font-size: 25px;
+}
+
+.action-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 10px;
+}
+
+.action-link {
+	text-decoration: none;
+	background-color: transparent;
+	border: none;
+}
+
+.card-btn {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center;
+	align-items: center;
+	min-height: 100px !important;
+}
+
+.btn-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 10px;
+	min-height: 50px;
+}

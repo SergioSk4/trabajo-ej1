@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  curso: one
+  almuno: one
+
+two:
+  curso: two
+  almuno: two

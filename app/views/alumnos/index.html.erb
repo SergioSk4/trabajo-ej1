@@ -1,0 +1,40 @@
+<h1>Alumnos</h1>
+
+<div id="alumnos">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Grado</th>
+      <th scope="col">Edad</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @alumnos.each do |alumno| %>
+    <tr>
+      <th scope="row"><%= alumno.nombre%></th>
+      <td><%= alumno.grado%></td>
+      <td><%= alumno.edad%></td>
+      <td class="action-container">
+      <%= link_to edit_alumno_path(alumno), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-pencil'></i>
+          <p>Editar</p>
+        </div>
+      <% end %>
+      <%=button_to alumno, method: :delete, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-trash-alt' ></i>
+          <p>Borrar</p>
+        </div>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+<%= link_to "Nuevo alumno", new_alumno_path, :class=>"btn btn-dark"  %>

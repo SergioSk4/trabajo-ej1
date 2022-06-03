@@ -1,0 +1,15 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Cursos</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cursos.each do |curso| %>
+    <tr>
+      <th scope="row"><%= curso.nombre%></th>
+    </tr>
+      <% end %>
+  </tbody>
+</table>

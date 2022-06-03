@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Notas</h1>
+
+<div class="btn-container">
+<button type="button" class="btn btn-dark card-btn"><i class='bx bx-plus' ></i>Nueva Nota</button>
+<button type="button" class="btn btn-dark card-btn"><i class='bx bxs-trophy'></i>Top 10 alumnos</button>
+<button type="button" class="btn btn-dark card-btn"><i class='bx bx-sync'></i>Recuperación</button>
+</div>
+
+
+<div id="notas">
+  <% @notas.each do |nota| %>
+    <%= render nota %>
+    <p>
+      <%= link_to "Show this nota", nota %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New nota", new_nota_path %>

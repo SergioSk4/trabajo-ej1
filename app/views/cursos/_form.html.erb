@@ -1,0 +1,13 @@
+
+<%= simple_form_for(@curso) do |f| %>
+
+  <div class="form-inputs">
+    <%= f.input :nombre,  label: 'Nombre del curso', error: 'El nombre es necesario' %>
+    <%= f.input :profesor,  label: 'Nombre del profesor', error: 'El nombre es necesario' %>
+    <%= f.association :alumnos, label: 'Añadir Alumnos', label_method: :nombre %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Crear curso", :class=>"btn btn-dark", :style=>"margin-top: 10px"%>
+  </div>
+<% end %>

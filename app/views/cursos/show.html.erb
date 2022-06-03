@@ -1,0 +1,39 @@
+
+<h5>Curso</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Curso</th>
+      <th scope="col">Profesor</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row"><%= @curso.nombre%></th>
+      <td><%= @curso.profesor%></td>
+      <td class="action-container">
+      <%= link_to edit_curso_path(@curso), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-pencil'></i>
+          <p>Editar</p>
+        </div>
+      <% end %>
+      <%= button_to @curso, method: :delete, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-trash-alt' ></i>
+          <p>Borrar</p>
+        </div>
+      <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5>Alumnos asignados</h5>
+<%= render 'cursoAlumnos' %>
+
+<div>
+  <%= link_to "Lista de cursos", cursos_path, :class=>"btn btn-warning" %>
+</div>
