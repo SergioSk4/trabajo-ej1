@@ -3,7 +3,18 @@ class NotasController < ApplicationController
 
   # GET /notas or /notas.json
   def index
-    @notas = Nota.all
+
+    unless params[:alumno].present? && params[:curso].present?
+      @notas = Nota.all
+    else
+      @notas= Nota.where("exists (select * from alumnos where notas.alumno_id = alumnos.id and nombre like '%#{params[:alumno]}%') AND exists (select * from cursos where notas.curso_id = cursos.id and nombre like '%#{params[:curso]}%')")
+    end
+
+
+    puts 'NOTAAAAAS'
+    @notas.each do |nota|
+      puts nota
+    end
   end
 
   # GET /notas/1 or /notas/1.json
@@ -23,6 +34,8 @@ class NotasController < ApplicationController
   def create
     @nota = Nota.new(nota_params)
 
+    @nota['total'] = nota_params['parcial1'].to_f + nota_params['parcial2'].to_f + nota_params['zona'].to_f + nota_params['examen'].to_f
+
     respond_to do |format|
       if @nota.save
         format.html { redirect_to nota_url(@nota), notice: "Nota was successfully created." }
@@ -36,6 +49,8 @@ class NotasController < ApplicationController
 
   # PATCH/PUT /notas/1 or /notas/1.json
   def update
+
+    @nota['total'] = nota_params['parcial1'].to_f + nota_params['parcial2'].to_f + nota_params['zona'].to_f + nota_params['examen'].to_f
     respond_to do |format|
       if @nota.update(nota_params)
         format.html { redirect_to nota_url(@nota), notice: "Nota was successfully updated." }
@@ -65,6 +80,6 @@ class NotasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def nota_params
-      params.require(:nota).permit(:curso_id, :alumno_id, :parcial1, :parcial2, :zona, :examen, :total)
+      params.require(:nota).permit(:curso_id, :alumno_id, :parcial1, :parcial2, :zona, :examen, :total, :bimestre)
     end
 end

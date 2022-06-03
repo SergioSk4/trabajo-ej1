@@ -32,6 +32,8 @@
 	text-decoration: none;
 	background-color: transparent;
 	border: none;
+	display: block;
+	width: 100%;
 }
 
 .card-btn {

@@ -1,6 +1,13 @@
 class AlumnosController < ApplicationController
-  before_action :set_alumno, only: %i[ show edit update destroy ]
+  before_action :set_alumno, only: %i[ show edit update destroy notas ]
 
+
+
+  def notas 
+    @notas = @alumno.notas
+
+    render json: @notas
+  end
   # GET /alumnos or /alumnos.json
   def index
     @alumnos = Alumno.all

@@ -1,19 +1,17 @@
 
 <%= simple_form_for(@nota) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
-    <%= f.association :curso %>
-    <%= f.association :alumno %>
-    <%= f.input :parcial1 %>
-    <%= f.input :parcial2 %>
+    <%= f.association :curso, label_method: :nombre %>
+    <%= f.association :alumno, label_method: :nombre  %>
+    <%= f.input :bimestre%>
+    <%= f.input :parcial1, label: 'Parcial 1'%>
+    <%= f.input :parcial2, label: 'Parcial 2' %>
     <%= f.input :zona %>
     <%= f.input :examen %>
-    <%= f.input :total %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class=>"btn btn-dark", :style=>"margin-top: 10px"  %>
   </div>
 <% end %>

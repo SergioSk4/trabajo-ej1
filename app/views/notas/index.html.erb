@@ -1,21 +1,74 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Notas</h1>
 
 <div class="btn-container">
-<button type="button" class="btn btn-dark card-btn"><i class='bx bx-plus' ></i>Nueva Nota</button>
-<button type="button" class="btn btn-dark card-btn"><i class='bx bxs-trophy'></i>Top 10 alumnos</button>
-<button type="button" class="btn btn-dark card-btn"><i class='bx bx-sync'></i>Recuperación</button>
+<a href="/notas/new"class="btn btn-dark card-btn"><i class='bx bx-plus' ></i>Nueva Nota</a>
+<a href="#"class="btn btn-dark card-btn"><i class='bx bxs-trophy' ></i>Top 10 alumnos</a>
+<a href="#"class="btn btn-dark card-btn"><i class='bx bx-sync' ></i>Recuperación</a>
 </div>
+
+
+<form class="form-inline" action="/notas" method="get">
+<div style="margin-top: 15px">
+  <div class="form-group col-4">
+    <label for="busar" class="sr-only">Alumno</label>
+    <input type="text" class="form-control" id="buscar" placeholder="Ingrese alumno a buscar" name="alumno" value="<%= params[:alumno] %>">
+  </div>
+  <div class="form-group col-4">
+    <label for="curso" class="sr-only">Cursos</label>
+    <input type="text" class="form-control" id="vurs" placeholder="Ingrese curso a buscar" name="curso" value="<%= params[:curso] %>">
+  </div>
+</div>
+<div style="margin-top: 15px">
+  <button type="submit" class="btn btn-dark">Buscar</button>
+  <a href="/notas" class="btn btn-dark">Limpiar</a>
+</div>
+</form>
+
 
 
 <div id="notas">
-  <% @notas.each do |nota| %>
-    <%= render nota %>
-    <p>
-      <%= link_to "Show this nota", nota %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New nota", new_nota_path %>
+
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Alumno</th>
+      <th scope="col">Curso</th>
+      <th scope="col">Nota</th>
+      <th scope="col">Bimestre</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @notas.each do |nota| %>
+    <tr>
+      <th scope="row"><%= nota.alumno.nombre%></th>
+      <td><%= nota.curso.nombre%></td>
+      <td><%= nota.total%></td>
+      <td><%= nota.bimestre%></td>
+      <td class="action-container">
+      <%= link_to edit_nota_path(nota), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-pencil'></i>
+          <p>Editar</p>
+        </div>
+      <% end %>
+      <%=button_to nota, method: :delete, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-trash-alt' ></i>
+          <p>Borrar</p>
+        </div>
+      <% end %>
+      <%= link_to nota, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-notepad'></i>
+          <p>Notas</p>
+        </div>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
