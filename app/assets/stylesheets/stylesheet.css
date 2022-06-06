@@ -36,6 +36,17 @@
 	width: 100%;
 }
 
+.btn-green {
+	background-color: #1d6f42;
+	color: white;
+	text-decoration: none;
+}
+
+.btn-green:hover {
+	text-decoration: none;
+	color: white;
+}
+
 .card-btn {
 	display: flex !important;
 	flex-direction: column !important;

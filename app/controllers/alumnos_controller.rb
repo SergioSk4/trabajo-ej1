@@ -29,7 +29,7 @@ class AlumnosController < ApplicationController
 
   # GET /alumnos or /alumnos.json
   def index
-    @alumnos = Alumno.all
+    @alumnos = Alumno.where("nombre like ?", "%#{params[:buscar]}%").page params[:page]
   end
 
   # GET /alumnos/1 or /alumnos/1.json

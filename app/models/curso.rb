@@ -4,6 +4,8 @@ class Curso < ApplicationRecord
 
     has_many :notas, :dependent => :destroy
 
+    paginates_per 7
+
 
     validates :nombre, presence: true
     validates :profesor, presence: true

@@ -27,7 +27,7 @@ class CursosController < ApplicationController
 
   # GET /cursos or /cursos.json
   def index
-    @cursos = Curso.all
+    @cursos = Curso.where("nombre like ?", "%#{params[:buscar]}%").page params[:page]
   end
 
   # GET /cursos/1 or /cursos/1.json

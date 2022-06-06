@@ -1,5 +1,15 @@
 <h1>Alumnos</h1>
 
+<form class="form-inline" action="/alumnos" method="get">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="inputPassword2" class="sr-only">Busqueda</label>
+    <input type="text" class="form-control" id="buscar" placeholder="Ingrese nombre a buscar" name="buscar" value="<%= params[:buscar] %>">
+  </div>
+  <button type="submit" class="btn btn-dark">Buscar</button>
+  <a href="/alumnos" class="btn btn-dark">Limpiar</a>
+</form>
+<hr>
+
 <div id="alumnos">
 <table class="table">
   <thead>
@@ -49,4 +59,10 @@
 </table>
 </div>
 
-<%= link_to "Nuevo alumno", new_alumno_path, :class=>"btn btn-dark"  %>
+<%= link_to "Nuevo alumno", new_alumno_path, :class=>"btn btn-dark"  %><br> <br> <br>
+
+
+<%= paginate @alumnos, theme: 'bootstrap-5',
+    pagination_class: "pagination-sm flex-wrap justify-content-center",
+    nav_class: "d-inline-block" %>
+    <hr>

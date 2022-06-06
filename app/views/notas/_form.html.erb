@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.association :curso, label_method: :nombre, :selected => params[:curso], :include_blank => "Selecciona curso"%>
     <%= f.association :alumno, label_method: :nombre, :selected => params[:alumno], :include_blank => "Selecciona alumno" %>
-    <%= f.input :bimestre%>
+    <%= f.input :bimestre, collection: 1..5 %>
     <%= f.input :parcial1, label: 'Parcial 1'%>
     <%= f.input :parcial2, label: 'Parcial 2' %>
     <%= f.input :zona %>

@@ -52,13 +52,10 @@
 <% end %>
 
 <%# Muestra el promedio %>
-<% if @sumatoria_notas%>
 <div class="promedio">
 <h5>Promedio:</h5>
-<h5><%= @sumatoria_notas %></h5>
+<h5><%=number_with_precision(@sumatoria_notas, precision: 2)%> pts</h5>
 </div>
-<button class="btn btn-warning">Cerrar clase</button>
-<% end %>
 
 
 <%= link_to "Crear Nota", new_nota_path(:alumno =>@alumno.id , :curso =>params[:curso]), :class=>"btn btn-dark"  %>

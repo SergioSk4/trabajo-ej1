@@ -9,7 +9,7 @@ class Nota < ApplicationRecord
   validates_uniqueness_of :bimestre, scope: [:curso, :alumno], message: 'ya tiene nota' 
 
 
-  paginates_per 10
+  paginates_per 2
 
   def self.estados
     %w(Abierto Cerrado)
