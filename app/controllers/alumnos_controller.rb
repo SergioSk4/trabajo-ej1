@@ -2,7 +2,7 @@ class AlumnosController < ApplicationController
   before_action :set_alumno, only: %i[ show edit update destroy notas ]
 
 
-
+  # GET /alumnos/:id(alumno)/notas
   def notas 
     if params[:curso] == "" || !params[:curso] 
       @notas = @alumno.notas
@@ -24,6 +24,9 @@ class AlumnosController < ApplicationController
     end
     # 
   end
+
+
+
   # GET /alumnos or /alumnos.json
   def index
     @alumnos = Alumno.all

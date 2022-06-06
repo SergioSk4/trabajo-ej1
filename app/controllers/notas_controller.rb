@@ -1,20 +1,25 @@
 class NotasController < ApplicationController
-  before_action :set_nota, only: %i[ show edit update destroy ]
+  before_action :set_nota, only: %i[ show edit update destroy cierre]
+
+
+  def cierre
+    if @nota.abierto?
+      @nota.estado_cierre = 'Cerrado'
+      @nota.save
+      redirect_to @nota
+    else
+      redirect_to @nota, alert: "La nota ya está cerrada"
+    end    
+  end
+  
 
   # GET /notas or /notas.json
   def index
-
     unless params[:alumno].present? || params[:curso].present?
-      @notas = Nota.all
+      @notas = Nota.all.pages params[:page]
     else
       
-      @notas = Nota.where("EXISTS (SELECT * FROM alumnos WHERE notas.alumno_id = alumnos.id AND nombre LIKE ?)", "%#{params[:alumno]}%").where("EXISTS (SELECT * FROM cursos WHERE notas.curso_id = cursos.id AND nombre LIKE ?)", "%#{params[:curso]}%")      
-    end
-
-
-    puts 'NOTAAAAAS'
-    @notas.each do |nota|
-      puts nota
+      @notas = Nota.where("EXISTS (SELECT * FROM alumnos WHERE notas.alumno_id = alumnos.id AND nombre LIKE ?)", "%#{params[:alumno]}%").where("EXISTS (SELECT * FROM cursos WHERE notas.curso_id = cursos.id AND nombre LIKE ?)", "%#{params[:curso]}%").pages params[:page]      
     end
   end
 
@@ -25,6 +30,7 @@ class NotasController < ApplicationController
   # GET /notas/new
   def new
     @nota = Nota.new
+    @nota.estado_cierre = 'Abierto'
   end
 
   # GET /notas/1/edit
@@ -81,6 +87,6 @@ class NotasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def nota_params
-      params.require(:nota).permit(:curso_id, :alumno_id, :parcial1, :parcial2, :zona, :examen, :total, :bimestre)
+      params.require(:nota).permit(:curso_id, :alumno_id, :parcial1, :parcial2, :zona, :examen, :total, :bimestre, :estado_cierre)
     end
 end

@@ -5,6 +5,7 @@
       <th scope="col">Curso</th>
       <th scope="col">Nota</th>
       <th scope="col">Bimestre</th>
+      <th scope="col">Estado</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -15,6 +16,7 @@
       <td><%= @nota.curso.nombre%></td>
       <td><%= @nota.total%></td>
       <td><%= @nota.bimestre%></td>
+      <td><%= @nota.estado_cierre%></td>
       <td class="action-container">
       <%= link_to edit_nota_path(@nota), :class=>"action-link" do %>
         <div class="action-btn">

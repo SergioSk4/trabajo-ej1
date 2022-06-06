@@ -38,6 +38,7 @@
       <th scope="col">Curso</th>
       <th scope="col">Nota</th>
       <th scope="col">Bimestre</th>
+      <th scope="col">Estado</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -49,11 +50,26 @@
       <td><%= nota.curso.nombre%></td>
       <td><%= nota.total%></td>
       <td><%= nota.bimestre%></td>
+      <td><%= nota.estado_cierre%></td>
       <td class="action-container">
       <%= link_to edit_nota_path(nota), :class=>"action-link" do %>
         <div class="action-btn">
           <i class='bx bxs-pencil'></i>
           <p>Editar</p>
+        </div>
+      <% end %>
+      <% if nota.abierto? %>
+      <%= link_to cierre_nota_path(nota), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bx-stop'></i>
+          <p>Cerrar</p>
+        </div>
+      <% end %>  
+      <% end %>
+       <%= link_to notas_alumno_path(nota.alumno, :curso => nota.curso.id), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-notepad'></i>
+          <p>Notas</p>
         </div>
       <% end %>
       <%=button_to nota, method: :delete, :class=>"action-link" do %>
@@ -62,15 +78,11 @@
           <p>Borrar</p>
         </div>
       <% end %>
-      <%= link_to notas_alumno_path(nota.alumno, :curso => nota.curso.id), :class=>"action-link" do %>
-        <div class="action-btn">
-          <i class='bx bxs-notepad'></i>
-          <p>Notas</p>
-        </div>
-      <% end %>
       </td>
     </tr>
   <% end %>
   </tbody>
 </table>
 </div>
+
+<%= paginate @notas %>

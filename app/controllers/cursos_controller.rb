@@ -1,5 +1,29 @@
 class CursosController < ApplicationController
-  before_action :set_curso, only: %i[ show edit update destroy ]
+  before_action :set_curso, only: %i[ show edit update destroy notas cierre]
+
+ # GET /alumnos/:id(alumno)/notas
+  def notas 
+    if params[:alumno] == "" || !params[:alumno] 
+      @notas = @curso.notas
+    else
+      @notas = @curso.notas.where('alumno_id' => params[:alumno])
+
+      if @notas.length > 0
+      
+        @maximo_bimestre = @notas.maximum('bimestre')
+        @sumatoria_notas = 0
+  
+        @notas.each do |nota|
+          @sumatoria_notas = @sumatoria_notas + nota.total 
+        end
+  
+        @sumatoria_notas = @sumatoria_notas / @maximo_bimestre
+      end
+      
+    end
+    # 
+  end
+  
 
   # GET /cursos or /cursos.json
   def index
@@ -66,9 +90,6 @@ class CursosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def curso_params
-      puts 'ERRRRRRRRROR'
-      puts params
-      puts 'ERRRRRRRRROR'
       params.require(:curso).permit(:nombre, :profesor, :alumno_ids=>[])
     end
 end

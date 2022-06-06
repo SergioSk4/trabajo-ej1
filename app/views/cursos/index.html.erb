@@ -22,6 +22,12 @@
           <p>Editar</p>
         </div>
       <% end %>
+            <%= link_to notas_curso_path(curso), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-notepad'></i>
+          <p>Notas</p>
+        </div>
+      <% end %>
       <%=button_to curso, method: :delete, :class=>"action-link" do %>
         <div class="action-btn">
           <i class='bx bxs-trash-alt' ></i>

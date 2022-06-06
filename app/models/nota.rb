@@ -7,4 +7,19 @@ class Nota < ApplicationRecord
   validates :examen, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 40, only_numeric: true}
   validates :bimestre, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 5, only_integer: true}
   validates_uniqueness_of :bimestre, scope: [:curso, :alumno], message: 'ya tiene nota' 
+
+
+  paginates_per 10
+
+  def self.estados
+    %w(Abierto Cerrado)
+  end
+
+  def cerrado?
+    self.estado_cierre == 'Cerrado'
+  end
+
+  def abierto?
+    self.estado_cierre == 'Abierto'
+  end
   end

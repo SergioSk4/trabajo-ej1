@@ -1,14 +1,14 @@
-<h4 style="margin-top: 20px;">Notas de <%= @alumno.nombre %></h4>
+<h4 style="margin-top: 20px;">Notas de <%= @curso.nombre %></h4>
 
 <%= form_with url: "", method: :get do |form| %>
-  <%= form.collection_select :curso, @cursos, :id, :nombre, { selected: params[:curso], :include_blank => 'Todos los cursos'}, {onchange: 'this.form.submit()', class: 'form-select'}%>
+  <%= form.collection_select :alumno, @alumnos, :id, :nombre, { selected: params[:alumno], :include_blank => 'Todos los aumnos'}, {onchange: 'this.form.submit()', class: 'form-select'}%>
 <% end %>
 
 <% if @notas.length > 0 %>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Curso</th>
+      <th scope="col">Alumno</th>
       <th scope="col">Nota</th>
       <th scope="col">Bimestre</th>
       <th scope="col">Acciones</th>
@@ -18,7 +18,7 @@
   <tbody>
   <% @notas.each do |nota| %>
     <tr>
-      <th scope="row"><%= nota.curso.nombre%></th>
+      <th scope="row"><%= nota.alumno.nombre%></th>
       <td><%= nota.total%> pts</td>
       <td><%= nota.bimestre%></td>
       <td class="action-container">
@@ -28,7 +28,7 @@
           <p>Editar</p>
         </div>
       <% end %>
-       <% if nota.abierto? %>
+      <% if nota.abierto? %>
       <%= link_to cierre_nota_path(nota), :class=>"action-link" do %>
         <div class="action-btn">
           <i class='bx bx-stop'></i>
@@ -57,8 +57,10 @@
 <h5>Promedio:</h5>
 <h5><%= @sumatoria_notas %></h5>
 </div>
-<button class="btn btn-warning">Cerrar clase</button>
+ <% if !@notas_cerradas %>
+     <%= link_to "Cerrar Promedio", cierre_curso_path(@curso), :class=>"btn btn-warning" %>
+  <% end %>
 <% end %>
 
 
-<%= link_to "Crear Nota", new_nota_path(:alumno =>@alumno.id , :curso =>params[:curso]), :class=>"btn btn-dark"  %>
+<%= link_to "Crear Nota", new_nota_path(:alumno =>params[:alumno] , :curso =>@curso.id), :class=>"btn btn-dark"  %>

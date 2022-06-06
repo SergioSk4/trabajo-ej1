@@ -77,3 +77,5 @@ end
 
 gem 'simple_form'
 gem 'where_exists'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
