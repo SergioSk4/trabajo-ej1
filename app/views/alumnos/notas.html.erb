@@ -1,0 +1,56 @@
+<h4 style="margin-top: 20px;">Notas de <%= @alumno.nombre %></h4>
+
+<%= form_with url: "", method: :get do |form| %>
+  <%= form.collection_select :curso, @cursos, :id, :nombre, { selected: params[:curso], :include_blank => 'Todos los cursos'}, {onchange: 'this.form.submit()', class: 'form-select'}%>
+<% end %>
+
+<% if @notas.length > 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Curso</th>
+      <th scope="col">Nota</th>
+      <th scope="col">Bimestre</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @notas.each do |nota| %>
+    <tr>
+      <th scope="row"><%= nota.curso.nombre%></th>
+      <td><%= nota.total%> pts</td>
+      <td><%= nota.bimestre%></td>
+      <td class="action-container">
+      <%= link_to edit_nota_path(nota), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-pencil'></i>
+          <p>Editar</p>
+        </div>
+      <% end %>
+      <%=button_to nota, method: :delete, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-trash-alt' ></i>
+          <p>Borrar</p>
+        </div>
+      <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+  <h4 style="margin: 20px 0px;">No hay notas disponibles</h4>
+<% end %>
+
+<%# Muestra el promedio %>
+<% if @sumatoria_notas%>
+<div class="promedio">
+<h5>Promedio:</h5>
+<h5><%= @sumatoria_notas %></h5>
+</div>
+<button class="btn btn-warning">Cerrar clase</button>
+<% end %>
+
+
+<%= link_to "Crear Nota", new_nota_path(:alumno =>@alumno.id , :curso =>params[:curso]), :class=>"btn btn-dark"  %>

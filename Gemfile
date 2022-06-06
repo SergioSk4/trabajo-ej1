@@ -76,3 +76,4 @@ end
 
 
 gem 'simple_form'
+gem 'where_exists'

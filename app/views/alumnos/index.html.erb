@@ -18,10 +18,22 @@
       <td><%= alumno.grado%></td>
       <td><%= alumno.edad%></td>
       <td class="action-container">
+      <%= link_to alumno, :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-user'></i>
+          <p>Ver</p>
+        </div>
+      <% end %>
       <%= link_to edit_alumno_path(alumno), :class=>"action-link" do %>
         <div class="action-btn">
           <i class='bx bxs-pencil'></i>
           <p>Editar</p>
+        </div>
+      <% end %>
+      <%= link_to notas_alumno_path(alumno), :class=>"action-link" do %>
+        <div class="action-btn">
+          <i class='bx bxs-notepad'></i>
+          <p>Notas</p>
         </div>
       <% end %>
       <%=button_to alumno, method: :delete, :class=>"action-link" do %>

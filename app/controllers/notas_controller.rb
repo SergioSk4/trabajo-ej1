@@ -4,10 +4,11 @@ class NotasController < ApplicationController
   # GET /notas or /notas.json
   def index
 
-    unless params[:alumno].present? && params[:curso].present?
+    unless params[:alumno].present? || params[:curso].present?
       @notas = Nota.all
     else
-      @notas= Nota.where("exists (select * from alumnos where notas.alumno_id = alumnos.id and nombre like '%#{params[:alumno]}%') AND exists (select * from cursos where notas.curso_id = cursos.id and nombre like '%#{params[:curso]}%')")
+      
+      @notas = Nota.where("EXISTS (SELECT * FROM alumnos WHERE notas.alumno_id = alumnos.id AND nombre LIKE ?)", "%#{params[:alumno]}%").where("EXISTS (SELECT * FROM cursos WHERE notas.curso_id = cursos.id AND nombre LIKE ?)", "%#{params[:curso]}%")      
     end
 
 

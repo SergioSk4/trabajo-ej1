@@ -4,9 +4,25 @@ class AlumnosController < ApplicationController
 
 
   def notas 
-    @notas = @alumno.notas
+    if params[:curso] == "" || !params[:curso] 
+      @notas = @alumno.notas
+    else
+      @notas = @alumno.notas.where('curso_id' => params[:curso])
 
-    render json: @notas
+      if @notas.length > 0
+      
+        @maximo_bimestre = @notas.maximum('bimestre')
+        @sumatoria_notas = 0
+  
+        @notas.each do |nota|
+          @sumatoria_notas = @sumatoria_notas + nota.total 
+        end
+  
+        @sumatoria_notas = @sumatoria_notas / @maximo_bimestre
+      end
+      
+    end
+    # 
   end
   # GET /alumnos or /alumnos.json
   def index
@@ -70,6 +86,8 @@ class AlumnosController < ApplicationController
       @alumno = Alumno.find(params[:id])
       @cursos = @alumno.cursos.all
     end
+
+    # Calcula priomedio
 
     # Only allow a list of trusted parameters through.
     def alumno_params

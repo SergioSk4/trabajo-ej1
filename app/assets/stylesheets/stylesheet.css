@@ -50,3 +50,11 @@
 	gap: 10px;
 	min-height: 50px;
 }
+
+.promedio {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center !important;
+	gap: 15px;
+	margin-bottom: 20px;
+}

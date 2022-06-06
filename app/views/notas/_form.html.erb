@@ -2,8 +2,8 @@
 <%= simple_form_for(@nota) do |f| %>
 
   <div class="form-inputs">
-    <%= f.association :curso, label_method: :nombre %>
-    <%= f.association :alumno, label_method: :nombre  %>
+    <%= f.association :curso, label_method: :nombre, :selected => params[:curso], :include_blank => "Selecciona curso"%>
+    <%= f.association :alumno, label_method: :nombre, :selected => params[:alumno], :include_blank => "Selecciona alumno" %>
     <%= f.input :bimestre%>
     <%= f.input :parcial1, label: 'Parcial 1'%>
     <%= f.input :parcial2, label: 'Parcial 2' %>
